@@ -1,32 +1,77 @@
-Blockly.Blocks['led_on'] = {
+Blockly.Blocks['add_device'] = {
   init: function() {
-    this.setColour(120);
+    this.setColour(200);
     this.appendDummyInput()
-        .appendField('turn LED on');
+        .appendField('assign')
+        .appendField(
+          new Blockly.FieldDropdown([
+            ['led', 'led'],
+            ['motor', 'servo']
+            //['sensor', 'sensor']
+          ]),'DEVICE_TYPE')
+        .appendField('named')
+        .appendField(
+          new Blockly.FieldTextInput('device1'),
+          'DEVICE_NAME'
+        )
+        .appendField('to pin')
+        .appendField(
+          new Blockly.FieldTextInput('13'),
+          'DEVICE_PIN'
+        );
+    this.setNextStatement(true);
+    this.setPreviousStatement(true);
+  }
+};
+
+Blockly.Blocks['led_on_off'] = {
+  init: function() {
+    this.setColour(60);
+    this.appendDummyInput()
+        .appendField('turn')
+        .appendField(
+          new Blockly.FieldTextInput('device1'),
+          'DEVICE_NAME'
+        )
+        .appendField('LED')
+        .appendField(new Blockly.FieldDropdown([
+          ['on', 'on'],
+          ['off', 'off']
+        ]), 'ON_OFF')
+
+        ;
     this.setNextStatement(true);
     this.setPreviousStatement(true);    
   }
 };
 
-Blockly.Blocks['led_off'] = {
+Blockly.Blocks['led_blink'] = {
   init: function() {
-    this.setColour(30);
+    this.setColour(60);
     this.appendDummyInput()
-        .appendField('turn LED off');
+        .appendField('blink')
+        .appendField(
+          new Blockly.FieldTextInput('device1'),
+          'DEVICE_NAME'
+        )
+        .appendField('LED every')
+        .appendField(new Blockly.FieldTextInput('500'), 'BLINK_TIME')
+        .appendField('milliseconds');
     this.setNextStatement(true);
     this.setPreviousStatement(true);    
   }
 };
+
 
 Blockly.Blocks['motor_on'] = {
   init: function() {
-    this.setColour(0);
+    this.setColour(180);
     this.appendDummyInput()
         .appendField('the')
-        .appendField(new Blockly.FieldDropdown([
-          ['left', 'left'],
-          ['right', 'right']
-        ]), 'MOTOR')
+        .appendField(
+          new Blockly.FieldTextInput('device1'),
+          'DEVICE_NAME'
+        )
         .appendField('motor')
         .appendField(new Blockly.FieldDropdown([
           ['goes clockwise', 'cw'],
