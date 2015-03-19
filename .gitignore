@@ -8,3 +8,5 @@ build
 *.crx
 
 *.pem
+
+static/js/dest/bundle.js
